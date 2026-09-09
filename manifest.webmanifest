@@ -1,0 +1,13 @@
+{
+  "name": "青笺 · AI Chat",
+  "short_name": "青笺",
+  "description": "粉白灰风格的 AI 角色聊天 PWA",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f2f5",
+  "theme_color": "#f6f2f5",
+  "orientation": "portrait",
+  "icons": [
+    {"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
