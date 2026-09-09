@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -11,46 +11,119 @@
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" href="./icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./home.css" />
 </head>
 <body>
   <div id="app" class="app-shell">
-    <header class="topbar glass">
-      <button class="icon-btn" id="openSettings" aria-label="设置">☰</button>
-      <div class="topbar-title">
-        <span id="activeAvatar" class="mini-avatar">L</span>
-        <div>
-          <strong id="activeName">卢恩</strong>
-          <small id="activeStatus">在线</small>
+    <section id="homeScreen" class="home-screen">
+      <div class="home-actions">
+        <button class="home-pill" id="homeEdit">編集</button>
+        <div class="home-actions-right">
+          <button class="home-circle" id="homeAdd" aria-label="友だちを追加">＋</button>
+          <button class="home-circle" id="homeMore" aria-label="API設定">•••</button>
         </div>
       </div>
-      <button class="icon-btn" id="openProfile" aria-label="角色资料">•••</button>
-    </header>
 
-    <main id="chatView" class="chat-view">
-      <section id="messageList" class="message-list" aria-live="polite"></section>
-    </main>
+      <section class="home-card">
+        <div class="profile-main" id="homeProfileCard">
+          <div class="profile-avatar" id="homeUserAvatar">A</div>
+          <div class="profile-copy">
+            <h2 id="homeUserName">ユーザー</h2>
+            <p id="homeSignature">まだ署名はありません</p>
+          </div>
+          <span class="chevron">›</span>
+        </div>
+        <button class="profile-subrow" id="homeAccountRow">
+          <span>アカウント設定</span><span class="chevron">›</span>
+        </button>
+      </section>
 
-    <section id="stickerTray" class="sticker-tray glass hidden">
-      <div class="tray-head">
-        <strong>表情包</strong>
-        <button id="closeStickerTray" class="plain-btn">收起</button>
-      </div>
-      <div id="stickerGrid" class="sticker-grid"></div>
+      <label class="home-search">
+        <span class="search-icon" aria-hidden="true"></span>
+        <input id="homeSearch" type="search" placeholder="検索" />
+      </label>
+
+      <section class="home-card settings-list">
+        <button class="settings-home-row" data-feature="data">
+          <span class="settings-home-icon">↥</span><span class="row-content">データ・通知</span><span class="chevron">›</span>
+        </button>
+        <button class="settings-home-row" data-feature="stickers">
+          <span class="settings-home-icon">♡</span><span class="row-content">スタンプ</span><span class="chevron">›</span>
+        </button>
+        <button class="settings-home-row" data-feature="appearance">
+          <span class="settings-home-icon">Aa</span><span class="row-content">外観</span><span class="chevron">›</span>
+        </button>
+        <button class="settings-home-row" data-feature="world">
+          <span class="settings-home-icon">W</span><span class="row-content">世界設定</span><span class="chevron">›</span>
+        </button>
+        <button class="settings-home-row" data-feature="memory">
+          <span class="settings-home-icon">M</span><span class="row-content">メモリ</span><span class="chevron">›</span>
+        </button>
+      </section>
+
+      <section class="home-card chat-home-card">
+        <div class="chat-tabs">
+          <button class="chat-tab active">チャット</button>
+          <button class="chat-tab">グループ</button>
+          <button class="chat-tab">フレンド</button>
+          <button class="chat-tab">すべて</button>
+        </div>
+        <div class="chat-faces">
+          <div class="face-dot">L</div>
+          <div class="face-dot">A</div>
+          <div class="face-dot">＋</div>
+        </div>
+        <button class="chat-preview" id="homeChatPreview">
+          <div class="chat-preview-avatar" id="homeCharAvatar">L</div>
+          <div>
+            <h3 id="homeCharName">キャラクター</h3>
+            <p id="homeCharPreview">新しいメッセージはありません</p>
+          </div>
+          <time id="homeCharTime"></time>
+        </button>
+      </section>
     </section>
 
-    <footer class="composer-wrap glass">
-      <button id="toolBtn" class="round-btn" title="工具">＋</button>
-      <button id="stickerBtn" class="round-btn" title="表情包">♡</button>
-      <textarea id="messageInput" rows="1" placeholder="Message"></textarea>
-      <button id="sendBtn" class="send-btn">↑</button>
-    </footer>
+    <section id="chatScreen" class="chat-screen hidden">
+      <button id="openSettings" class="hidden-trigger" aria-hidden="true"></button>
+      <header class="topbar glass">
+        <button class="icon-btn" id="backHome" aria-label="戻る">‹</button>
+        <div class="topbar-title">
+          <span id="activeAvatar" class="mini-avatar">L</span>
+          <div>
+            <strong id="activeName">卢恩</strong>
+            <small id="activeStatus">オンライン</small>
+          </div>
+        </div>
+        <button class="icon-btn" id="openProfile" aria-label="プロフィール">•••</button>
+      </header>
 
-    <nav class="bottom-nav glass">
-      <button class="nav-item active" data-nav="chat"><span>◉</span><small>聊天</small></button>
-      <button class="nav-item" data-nav="contacts"><span>○</span><small>角色</small></button>
-      <button class="nav-item" data-nav="world"><span>▧</span><small>世界书</small></button>
-      <button class="nav-item" data-nav="preset"><span>◇</span><small>预设</small></button>
-      <button class="nav-item" data-nav="me"><span>⌁</span><small>我的</small></button>
+      <main id="chatView" class="chat-view">
+        <section id="messageList" class="message-list" aria-live="polite"></section>
+      </main>
+
+      <section id="stickerTray" class="sticker-tray glass hidden">
+        <div class="tray-head">
+          <strong>スタンプ</strong>
+          <button id="closeStickerTray" class="plain-btn">閉じる</button>
+        </div>
+        <div id="stickerGrid" class="sticker-grid"></div>
+      </section>
+
+      <footer class="composer-wrap glass">
+        <button id="toolBtn" class="round-btn" title="ツール">＋</button>
+        <button id="stickerBtn" class="round-btn" title="スタンプ">♡</button>
+        <textarea id="messageInput" rows="1" placeholder="メッセージ"></textarea>
+        <button id="sendBtn" class="send-btn">↑</button>
+      </footer>
+    </section>
+
+    <nav class="home-bottom-nav" id="homeBottomNav">
+      <button class="home-nav-item active" data-home-nav="home"><span>◉</span><small>ホーム</small></button>
+      <button class="home-nav-item" data-home-nav="timeline"><span>○</span><small>タイムライン</small></button>
+      <button class="home-nav-item" data-home-nav="novel"><span>＋</span><small>小説</small></button>
+      <button class="home-nav-item" data-home-nav="shopping"><span>□</span><small>買い物</small></button>
+      <button class="home-nav-item" data-home-nav="me"><span>⌁</span><small>マイ</small></button>
     </nav>
   </div>
 
@@ -58,143 +131,144 @@
   <aside id="settingsDrawer" class="drawer hidden" aria-hidden="true">
     <div class="drawer-head">
       <div>
-        <small>QINGCHAT</small>
-        <h2>设置</h2>
+        <small>QINGJIAN</small>
+        <h2>設定</h2>
       </div>
       <button id="closeSettings" class="icon-btn">×</button>
     </div>
     <div class="settings-tabs">
-      <button class="settings-tab active" data-tab="persona">人设</button>
+      <button class="settings-tab active" data-tab="persona">人設</button>
       <button class="settings-tab" data-tab="api">API</button>
-      <button class="settings-tab" data-tab="preset">预设</button>
-      <button class="settings-tab" data-tab="worldbook">世界书</button>
-      <button class="settings-tab" data-tab="regex">正则</button>
-      <button class="settings-tab" data-tab="stickers">表情包</button>
-      <button class="settings-tab" data-tab="appearance">美化</button>
-      <button class="settings-tab" data-tab="capabilities">权限</button>
-      <button class="settings-tab" data-tab="data">数据</button>
+      <button class="settings-tab" data-tab="preset">プリセット</button>
+      <button class="settings-tab" data-tab="worldbook">世界書</button>
+      <button class="settings-tab" data-tab="regex">正規表現</button>
+      <button class="settings-tab" data-tab="stickers">スタンプ</button>
+      <button class="settings-tab" data-tab="appearance">外観</button>
+      <button class="settings-tab" data-tab="capabilities">権限</button>
+      <button class="settings-tab" data-tab="data">データ</button>
     </div>
 
     <div class="settings-body">
       <section class="settings-panel active" data-panel="persona">
         <div class="card">
-          <h3>我的人设</h3>
-          <label>昵称<input id="userName" placeholder="阿青" /></label>
-          <label>设定<textarea id="userPersona" rows="6" placeholder="写下你的性格、职业、习惯、关系设定……"></textarea></label>
+          <h3>自分の人設</h3>
+          <label>名前<input id="userName" placeholder="阿青" /></label>
+          <label>設定<textarea id="userPersona" rows="6" placeholder="性格、仕事、習慣、関係設定など"></textarea></label>
         </div>
         <div class="card">
-          <h3>角色人设</h3>
-          <label>名字<input id="charName" placeholder="卢恩" /></label>
-          <label>头像字母<input id="charAvatar" maxlength="2" placeholder="L" /></label>
-          <label>设定<textarea id="charPersona" rows="8" placeholder="写下角色完整人设、语气、关系、边界……"></textarea></label>
+          <h3>キャラクター人設</h3>
+          <label>名前<input id="charName" placeholder="卢恩" /></label>
+          <label>アバター文字<input id="charAvatar" maxlength="2" placeholder="L" /></label>
+          <label>設定<textarea id="charPersona" rows="8" placeholder="キャラクターの人設、口調、関係、境界など"></textarea></label>
         </div>
       </section>
 
       <section class="settings-panel" data-panel="api">
         <div class="card">
-          <h3>OpenAI 兼容 API</h3>
+          <h3>OpenAI 互換 API</h3>
           <label>API URL<input id="apiUrl" placeholder="https://api.example.com/v1" /></label>
           <label>API Key<input id="apiKey" type="password" placeholder="sk-..." /></label>
           <div class="inline-fields">
-            <label>模型<select id="modelSelect"><option value="">先拉取模型</option></select></label>
-            <button id="loadModels" class="secondary-btn">拉取模型</button>
+            <label>モデル<select id="modelSelect"><option value="">先にモデルを取得</option></select></label>
+            <button id="loadModels" class="secondary-btn">モデル取得</button>
           </div>
-          <label>手动模型名<input id="modelManual" placeholder="gpt-4.1-mini / claude..." /></label>
+          <label>モデル名を手動入力<input id="modelManual" placeholder="gpt-4.1-mini / claude..." /></label>
           <div class="row-actions">
-            <button id="testApi" class="secondary-btn">测试连接</button>
+            <button id="testApi" class="secondary-btn">接続テスト</button>
             <span id="apiStatus" class="status-text"></span>
           </div>
-          <p class="hint">API Key 默认只保存在本机浏览器 localStorage。不要把真实 Key 写进 GitHub。</p>
+          <p class="hint">API Key はこの端末の localStorage にのみ保存されます。実際の Key を GitHub に書き込まないでください。</p>
         </div>
       </section>
 
       <section class="settings-panel" data-panel="preset">
         <div class="card">
-          <h3>预设</h3>
-          <label>系统附加提示词<textarea id="systemPreset" rows="8" placeholder="例如：回复像真实即时聊天，避免过度书面化……"></textarea></label>
+          <h3>プリセット</h3>
+          <label>システム追加プロンプト<textarea id="systemPreset" rows="8" placeholder="自然な会話、口語的な返答など"></textarea></label>
           <div class="inline-fields three">
             <label>温度<input id="temperature" type="number" min="0" max="2" step="0.1" /></label>
-            <label>最大回复<input id="maxTokens" type="number" min="64" max="4096" step="64" /></label>
-            <label>历史轮数<input id="historyTurns" type="number" min="2" max="100" step="1" /></label>
+            <label>最大返信<input id="maxTokens" type="number" min="64" max="4096" step="64" /></label>
+            <label>履歴ターン<input id="historyTurns" type="number" min="2" max="100" step="1" /></label>
           </div>
         </div>
       </section>
 
       <section class="settings-panel" data-panel="worldbook">
         <div class="card">
-          <div class="card-head"><h3>世界书</h3><button id="addWorldEntry" class="secondary-btn">新增条目</button></div>
-          <p class="hint">关键词命中时，条目会自动注入角色上下文。</p>
+          <div class="card-head"><h3>世界書</h3><button id="addWorldEntry" class="secondary-btn">項目追加</button></div>
+          <p class="hint">キーワードが一致すると、自動で会話コンテキストへ追加されます。</p>
           <div id="worldEntries" class="stack"></div>
         </div>
       </section>
 
       <section class="settings-panel" data-panel="regex">
         <div class="card">
-          <div class="card-head"><h3>正则</h3><button id="addRegexRule" class="secondary-btn">新增规则</button></div>
-          <p class="hint">可对发送前、显示前内容做替换。无效规则会自动跳过。</p>
+          <div class="card-head"><h3>正規表現</h3><button id="addRegexRule" class="secondary-btn">ルール追加</button></div>
+          <p class="hint">送信前や表示前の文字列を置換できます。</p>
           <div id="regexRules" class="stack"></div>
         </div>
       </section>
 
       <section class="settings-panel" data-panel="stickers">
         <div class="card">
-          <h3>表情包</h3>
-          <label class="file-label">导入图片<input id="stickerImport" type="file" accept="image/*" multiple /></label>
+          <h3>スタンプ</h3>
+          <label class="file-label">画像を取り込む<input id="stickerImport" type="file" accept="image/*" multiple /></label>
           <div id="stickerManage" class="sticker-grid manage"></div>
         </div>
       </section>
 
       <section class="settings-panel" data-panel="appearance">
         <div class="card">
-          <h3>粉白灰主题</h3>
+          <h3>ピンク・白・グレー</h3>
           <div class="inline-fields three">
-            <label>强调色<input id="accentColor" type="color" /></label>
-            <label>背景色<input id="bgColor" type="color" /></label>
-            <label>气泡色<input id="bubbleColor" type="color" /></label>
+            <label>アクセント<input id="accentColor" type="color" /></label>
+            <label>背景<input id="bgColor" type="color" /></label>
+            <label>吹き出し<input id="bubbleColor" type="color" /></label>
           </div>
-          <label>聊天背景图片<input id="wallpaperInput" type="file" accept="image/*" /></label>
-          <label>字号 <input id="fontScale" type="range" min="0.85" max="1.25" step="0.05" /></label>
-          <button id="resetAppearance" class="secondary-btn">恢复默认</button>
+          <label>チャット背景<input id="wallpaperInput" type="file" accept="image/*" /></label>
+          <label>文字サイズ <input id="fontScale" type="range" min="0.85" max="1.25" step="0.05" /></label>
+          <button id="resetAppearance" class="secondary-btn">初期設定に戻す</button>
         </div>
       </section>
 
       <section class="settings-panel" data-panel="capabilities">
         <div class="card">
-          <h3>通知与系统能力</h3>
-          <div class="cap-row"><div><strong>通知权限</strong><small>允许 PWA 弹出系统通知</small></div><button id="requestNotify" class="secondary-btn">申请</button></div>
-          <div class="cap-row"><div><strong>位置权限</strong><small>天气工具使用当前位置</small></div><button id="requestLocation" class="secondary-btn">申请</button></div>
-          <div class="cap-row"><div><strong>安装为 PWA</strong><small>安装后体验更接近原生应用</small></div><button id="installPwa" class="secondary-btn">安装</button></div>
-          <div class="cap-row"><div><strong>测试通知</strong><small>验证系统通知是否可用</small></div><button id="testNotify" class="secondary-btn">发送</button></div>
-          <p class="hint">网站无法保证“永不被系统杀后台”。真正的关屏后 AI 主动消息，需要 Web Push 后端；系统闹钟、直接控制音乐 App 等能力也受浏览器限制。</p>
+          <h3>通知と権限</h3>
+          <div class="cap-row"><div><strong>通知</strong><small>PWA のシステム通知を許可</small></div><button id="requestNotify" class="secondary-btn">許可</button></div>
+          <div class="cap-row"><div><strong>位置情報</strong><small>天気機能で現在地を使用</small></div><button id="requestLocation" class="secondary-btn">許可</button></div>
+          <div class="cap-row"><div><strong>PWA としてインストール</strong><small>ホーム画面から起動できます</small></div><button id="installPwa" class="secondary-btn">インストール</button></div>
+          <div class="cap-row"><div><strong>通知テスト</strong><small>通知が使えるか確認</small></div><button id="testNotify" class="secondary-btn">送信</button></div>
+          <p class="hint">Web サイトだけではバックグラウンド常駐を保証できません。画面を閉じた後の自発メッセージには Web Push のバックエンドが必要です。</p>
         </div>
       </section>
 
       <section class="settings-panel" data-panel="data">
         <div class="card">
-          <h3>本地数据</h3>
+          <h3>ローカルデータ</h3>
           <div class="row-actions">
-            <button id="exportData" class="secondary-btn">导出 JSON</button>
-            <label class="file-label compact">导入 JSON<input id="importData" type="file" accept="application/json" /></label>
-            <button id="clearData" class="danger-btn">清空</button>
+            <button id="exportData" class="secondary-btn">JSON 書き出し</button>
+            <label class="file-label compact">JSON 読み込み<input id="importData" type="file" accept="application/json" /></label>
+            <button id="clearData" class="danger-btn">消去</button>
           </div>
         </div>
       </section>
     </div>
-    <div class="drawer-footer"><button id="saveSettings" class="primary-btn">保存设置</button></div>
+    <div class="drawer-footer"><button id="saveSettings" class="primary-btn">保存</button></div>
   </aside>
 
   <div id="toolSheet" class="sheet hidden">
     <div class="sheet-handle"></div>
-    <button data-tool="weather">天气</button>
-    <button data-tool="calendar">日历事件</button>
-    <button data-tool="alarm">提醒 / 闹钟</button>
-    <button data-tool="music">听歌</button>
-    <button data-tool="cancel">取消</button>
+    <button data-tool="weather">天気</button>
+    <button data-tool="calendar">カレンダー</button>
+    <button data-tool="alarm">リマインダー</button>
+    <button data-tool="music">音楽</button>
+    <button data-tool="cancel">キャンセル</button>
   </div>
 
   <div id="modal" class="modal hidden"><div class="modal-card" id="modalCard"></div></div>
   <div id="toast" class="toast hidden"></div>
 
   <script src="./app.js" defer></script>
+  <script src="./home.js" defer></script>
 </body>
 </html>
