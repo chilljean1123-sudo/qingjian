@@ -1,0 +1,79 @@
+/* 2026-09 mobile polish: keep all form controls inside the viewport */
+.drawer,.settings-body,.settings-panel,.card,.entry,.feature-page,.char-editor-card,.char-fields,.page-field{min-width:0}
+.card input,.card textarea,.card select,.entry input,.entry textarea,.entry select,.char-fields input,.page-field input,.page-field textarea,.page-field select{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+.entry{overflow:hidden}
+.entry .entry-grid{grid-template-columns:minmax(0,1.55fr) minmax(0,.9fr);width:100%;min-width:0}
+.entry .entry-grid>*{min-width:0;max-width:100%;width:100%}
+.settings-body{overflow-x:hidden}
+.settings-panel{max-width:100%;overflow-x:hidden}
+.card{max-width:100%;overflow:hidden}
+.inline-fields>*{min-width:0;max-width:100%}
+
+/* Character editor: lighter, cleaner, more deliberate */
+.feature-page{background:
+  radial-gradient(circle at 8% 8%,rgba(248,221,230,.45),transparent 24%),
+  radial-gradient(circle at 92% 14%,rgba(218,242,229,.45),transparent 28%),
+  linear-gradient(180deg,#fbfafb 0%,#f6f8f7 100%)}
+.feature-head{position:sticky;top:0;z-index:3;margin:0 -2px 12px;padding:4px 2px;background:linear-gradient(180deg,rgba(251,250,251,.96) 68%,rgba(251,250,251,0));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.feature-head h1{font-weight:760;letter-spacing:-.035em}
+.feature-back{background:rgba(255,255,255,.9);border:1px solid rgba(35,35,38,.045);box-shadow:0 7px 22px rgba(50,42,48,.06)}
+.feature-actions{color:#242326}
+
+.char-editor-card{position:relative;background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.95);border-radius:30px;padding:24px;grid-template-columns:150px minmax(0,1fr);gap:24px;box-shadow:0 18px 50px rgba(65,54,62,.075);overflow:hidden}
+.char-editor-card:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,rgba(238,169,187,.6),rgba(223,239,231,.7),transparent);pointer-events:none}
+.char-avatar-block{justify-content:flex-start;padding-top:28px}
+.char-avatar-preview{width:126px;height:126px;border-radius:32px;background:linear-gradient(145deg,#f9d9e3 0%,#f7eef1 48%,#e6f3e9 100%);border:1px solid rgba(255,255,255,.9);box-shadow:0 12px 28px rgba(83,65,77,.08)}
+.char-upload{width:126px;text-align:center;margin-top:12px;border:1px solid #ebe5e8;border-radius:17px;padding:10px 8px;background:rgba(255,255,255,.82);font-size:13px;font-weight:700;color:#656066;box-shadow:0 5px 14px rgba(60,48,56,.035)}
+.char-fields{display:flex;flex-direction:column;gap:2px;min-width:0}
+.char-fields label,.page-field{gap:8px;margin-bottom:14px;font-size:13px;font-weight:720;color:#59545a}
+.char-fields input,.page-field input,.page-field textarea,.page-field select{border:1px solid #ebe7e9;background:rgba(255,255,255,.92);border-radius:18px;padding:13px 15px;min-height:49px;box-shadow:inset 0 1px 0 rgba(255,255,255,.9);transition:border-color .18s ease,box-shadow .18s ease,background .18s ease}
+.char-fields input:focus,.page-field input:focus,.page-field textarea:focus,.page-field select:focus{outline:none;border-color:#dfb8c4;background:#fff;box-shadow:0 0 0 3px rgba(238,169,187,.12)}
+.char-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.char-grid>*{min-width:0}
+.page-field{padding:0 2px}
+.page-field textarea{min-height:220px;line-height:1.65;resize:vertical}
+.feature-savebar{z-index:2;gap:12px;padding:14px 0 4px;background:linear-gradient(180deg,rgba(246,248,247,0),rgba(246,248,247,.96) 34%)}
+.feature-savebar button{height:52px;border:1px solid rgba(35,35,38,.04);border-radius:18px;background:rgba(255,255,255,.9);box-shadow:0 8px 24px rgba(61,51,58,.055);font-size:15px}
+.feature-savebar button.dark{background:#202126;color:#fff;border-color:#202126}
+
+/* Worldbook / regex cards: prevent the second field from escaping the drawer */
+[data-panel="worldbook"] .entry,[data-panel="regex"] .entry{padding:12px;border-radius:18px;background:#fcfbfc}
+[data-panel="worldbook"] .entry-grid{grid-template-columns:minmax(0,1.6fr) minmax(0,.8fr)}
+[data-panel="regex"] .entry-grid{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr)}
+[data-panel="worldbook"] .entry textarea,[data-panel="regex"] .entry textarea{display:block;max-width:100%}
+[data-panel="regex"] .entry>input{display:block;width:100%;max-width:100%;margin-top:8px}
+
+@media(max-width:560px){
+  .drawer{padding-left:14px;padding-right:14px}
+  .settings-body{padding-left:0;padding-right:0}
+  .card{padding:16px;border-radius:22px}
+  .entry{padding:10px}
+  .entry .entry-grid,[data-panel="worldbook"] .entry-grid,[data-panel="regex"] .entry-grid{grid-template-columns:minmax(0,1fr) minmax(0,.72fr);gap:8px}
+  [data-panel="regex"] .entry-grid{grid-template-columns:minmax(0,.62fr) minmax(0,1fr)}
+  .entry input,.entry select,.entry textarea{font-size:14px;padding:11px 12px}
+
+  .feature-page{padding-left:14px;padding-right:14px;padding-bottom:calc(env(safe-area-inset-bottom) + 26px)}
+  .feature-head{height:62px;margin-bottom:8px}
+  .feature-head h1{font-size:29px}
+  .char-editor-card{grid-template-columns:94px minmax(0,1fr);gap:15px;padding:18px 16px 20px;border-radius:26px;margin-bottom:18px}
+  .char-avatar-block{padding-top:25px;align-items:center}
+  .char-avatar-preview{width:86px;height:86px;border-radius:25px}
+  .char-avatar-preview span{transform:scale(.62)}
+  .char-upload{width:86px;padding:9px 6px;border-radius:15px;font-size:11px;line-height:1.25}
+  .char-fields label{font-size:12.5px;margin-bottom:11px}
+  .char-fields input{min-height:46px;padding:12px 13px;border-radius:17px}
+  .char-grid{grid-template-columns:1fr}
+  .page-field{margin-bottom:13px;font-size:12.5px}
+  .page-field input,.page-field select{min-height:48px;padding:12px 14px;border-radius:17px}
+  .page-field textarea{min-height:210px;padding:14px;border-radius:20px}
+  .feature-savebar{position:static;margin-top:6px;padding:4px 0 2px;background:transparent}
+  .feature-savebar button{height:50px;border-radius:17px}
+}
+
+@media(max-width:390px){
+  .drawer{padding-left:12px;padding-right:12px}
+  .card{padding:14px}
+  .entry .entry-grid,[data-panel="worldbook"] .entry-grid,[data-panel="regex"] .entry-grid{grid-template-columns:1fr}
+  .char-editor-card{grid-template-columns:82px minmax(0,1fr);gap:12px;padding:16px 14px}
+  .char-avatar-preview,.char-upload{width:76px}.char-avatar-preview{height:76px;border-radius:22px}
+}
