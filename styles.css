@@ -1,3 +1,4 @@
+@import url('./ui-fixes.css');
 :root{
   --bg:#f6f2f5;
   --surface:rgba(255,255,255,.82);
